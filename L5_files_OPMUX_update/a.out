@@ -1,0 +1,45 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.4 " "(v0_9_4)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_00F73860 .scope module, "ALU" "ALU" 2 1;
+ .timescale 0 0;
+v00F74BC8_0 .net "a", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v00F74C20_0 .net "b", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v00F74C78_0 .net "flag", 0 0, C4<z>; 0 drivers
+v00F74CD0_0 .net "opcode", 3 0, C4<zzzz>; 0 drivers
+v00F74D28_0 .var "result", 3 0;
+E_00F73000 .event edge, v00F74CD0_0;
+    .scope S_00F73860;
+T_0 ;
+    %wait E_00F73000;
+    %ix/load 1, 2, 0;
+    %mov 4, 0, 1;
+    %jmp/1 T_0.0, 4;
+    %load/x1p 8, v00F74CD0_0, 1;
+    %jmp T_0.1;
+T_0.0 ;
+    %mov 8, 2, 1;
+T_0.1 ;
+; Save base=8 wid=1 in lookaside.
+    %cmpi/u 8, 0, 1;
+    %jmp/1 T_0.2, 6;
+    %cmpi/u 8, 1, 1;
+    %jmp/1 T_0.3, 6;
+    %jmp T_0.4;
+T_0.2 ;
+    %set/v v00F74D28_0, 0, 4;
+    %jmp T_0.4;
+T_0.3 ;
+    %set/v v00F74D28_0, 1, 4;
+    %jmp T_0.4;
+T_0.4 ;
+    %jmp T_0;
+    .thread T_0, $push;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    ".\ALU.v";
