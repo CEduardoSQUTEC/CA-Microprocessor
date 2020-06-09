@@ -8,6 +8,8 @@ module Logic_part(a,b,opcode,result);
     // XOR = 4'b0110;
     // NOR = 4'b0111;
 
+    //Colocar result and sel en cada operacion para filtrar el tipo de operacion
+
     always @ (*)
       //Opmux para logic
       case(opcode[1])
@@ -15,7 +17,6 @@ module Logic_part(a,b,opcode,result);
            else //OR
         1: if(~opcode[0]) //XOR
            else //NOR
-
         //DEFAULT: considerar cuando operation no coincide con ninguna operacion
       endcase
 endmodule
