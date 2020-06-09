@@ -1,6 +1,6 @@
-module Logic_part(a,b,opcode,result);
+module Logic_part(a,b,ALUop,result);
     input [31:0] a,b;
-    input opcode;
+    input ALUop;
     output [31:0] result;
 
     // AND = 4'b0100;
@@ -12,10 +12,10 @@ module Logic_part(a,b,opcode,result);
 
     always @ (*)
       //Opmux para logic
-      case(opcode[1])
-        0: if(~opcode[0]) //AND
+      case(ALUop[1])
+        0: if(~ALUop[0]) //AND
            else //OR
-        1: if(~opcode[0]) //XOR
+        1: if(~ALUop[0]) //XOR
            else //NOR
         //DEFAULT: considerar cuando operation no coincide con ninguna operacion
       endcase
