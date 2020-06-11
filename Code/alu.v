@@ -1,6 +1,6 @@
-module ALU(a,b,ALUop,result,flag);
+module alu(a,b,aluop,result,flag);
     input [31:0] a,b;
-    input [3:0] ALUop;
+    input [3:0] aluop;
     output [31:0] result;
     output flag;
     wire[31:0] result_arithmetic_logic, result_arithmetic, result_logic, result_comparison;
