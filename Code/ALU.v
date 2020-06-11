@@ -1,4 +1,4 @@
-module alu(a,b,ALUop,result,flag);
+module ALU(a,b,ALUop,result,flag);
     input [31:0] a,b;
     input [3:0] ALUop;
     output [31:0] result;
