@@ -1,4 +1,4 @@
-module Arithmetic_part(a,b,ALUop,result,flag);
+module Arithmetic_part(a,b,ALUop,result);
   input [31:0] a,b;
   input [3:0] ALUop;
   output reg [31:0] result;

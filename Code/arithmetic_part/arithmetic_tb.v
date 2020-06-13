@@ -15,7 +15,6 @@ module arithmethic_tb;
       #1 $finish;
     end
     initial begin
-        a = 32'b101; b = 32'b11;
         $monitor ("a = %b, b = %b, ALUop=  %b, result  = %b", a, b, ALUop ,result);
         #5 $finish;
     end
