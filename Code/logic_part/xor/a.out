@@ -1,0 +1,45 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x562d338cd0d0 .scope module, "xor_tb" "xor_tb" 2 1;
+ .timescale 0 0;
+v0x562d338ed650_0 .var "a", 31 0;
+v0x562d338ed740_0 .var "b", 31 0;
+v0x562d338ed810_0 .net "result", 31 0, L_0x562d338ed910;  1 drivers
+S_0x562d338cd250 .scope module, "a1" "xor_" 2 5, 3 1 0, S_0x562d338cd0d0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "a"
+    .port_info 1 /INPUT 32 "b"
+    .port_info 2 /OUTPUT 32 "result"
+L_0x562d338ed910 .functor XOR 32, v0x562d338ed650_0, v0x562d338ed740_0, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
+v0x562d338cd470_0 .net "a", 31 0, v0x562d338ed650_0;  1 drivers
+v0x562d338ed430_0 .net "b", 31 0, v0x562d338ed740_0;  1 drivers
+v0x562d338ed510_0 .net "result", 31 0, L_0x562d338ed910;  alias, 1 drivers
+    .scope S_0x562d338cd0d0;
+T_0 ;
+    %pushi/vec4 5, 0, 32;
+    %store/vec4 v0x562d338ed650_0, 0, 32;
+    %pushi/vec4 3, 0, 32;
+    %store/vec4 v0x562d338ed740_0, 0, 32;
+    %vpi_call 2 9 "$monitor", "a = %b, b = %b, result  = %b", v0x562d338ed650_0, v0x562d338ed740_0, v0x562d338ed810_0 {0 0 0};
+    %delay 2, 0;
+    %vpi_call 2 10 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x562d338cd0d0;
+T_1 ;
+    %vpi_call 2 13 "$dumpfile", "xor_tb.vcd" {0 0 0};
+    %vpi_call 2 14 "$dumpvars" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "xor_tb.v";
+    "xor.v";
