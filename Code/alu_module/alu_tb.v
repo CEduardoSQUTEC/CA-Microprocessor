@@ -15,10 +15,11 @@ module alu_tb;
     #1 aluop = 4'b0110;
     #1 aluop = 4'b0111;
     #1 aluop = 4'b1010;
-    #0 a=32'b10; b=32'b10; aluop=4'b0010;
-    #1 $finish;
+    #8 $finish;
   end
-
+  initial begin
+    $monitor("a = %b, b = %b, aluop=  %b, result  = %b, flag = %b", a, b, aluop ,result, flag);
+  end
   initial begin
     $dumpfile("alu.vcd");
     $dumpvars;
