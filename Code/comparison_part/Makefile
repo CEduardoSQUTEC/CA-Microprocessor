@@ -1,5 +1,5 @@
 do:
-	iverilog -o a.out Comparison_tb.v Comparison.v full_adder.v ripple_carry_adder.v sign_extend.v
+	iverilog -o a.out Comparison_tb.v Comparison_.v full_adder_.v ripple_carry_adder_.v sign_extend_.v
 	vvp a.out
 
 clean:
