@@ -130,9 +130,9 @@ module datapath(input  logic        clk, reset,
   regfile     rf(clk, regwrite, instr[25:21],
                  instr[20:16], writereg,
                  result, srca, writedata);
-  mux2 #(5)   wrmux(instr[20:16], instr[15:11],
+  mux2 #(5)   wrmux(instr[20:16], instr[15:11], //WriteReg mux
                     regdst, writereg);
-  mux2 #(32)  resmux(aluout, readdata,
+  mux2 #(32)  resmux(aluout, readdata, //Result mux
                      memtoreg, result);
   signext     se(instr[15:0], signimm);
 
@@ -142,4 +142,3 @@ module datapath(input  logic        clk, reset,
   alu         alu(.a(srca), .b(srcb), .f(alucontrol),
                   .y(aluout), .zero(zero));
 endmodule
-
