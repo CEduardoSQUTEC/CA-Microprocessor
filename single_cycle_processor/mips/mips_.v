@@ -79,6 +79,7 @@ module maindec(input   [5:0] op,
     endcase
 endmodule
 
+//CONVERT TO 6 WORD
 module aludec(input  [5:0] funct,
               input  [1:0] aluop,
               output [2:0] alucontrol);
@@ -97,6 +98,7 @@ module aludec(input  [5:0] funct,
         endcase
     endcase
 endmodule
+//-------------
 
 module datapath(input          clk, reset,
                 input          memtoreg, pcsrc,

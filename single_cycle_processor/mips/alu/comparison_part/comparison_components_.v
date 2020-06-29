@@ -1,4 +1,4 @@
-module slt(a,b,result);
+module slt_(a,b,result);
   input [31:0] a,b;
   output [31:0] result;
   wire [31:0] comp;
@@ -6,7 +6,7 @@ module slt(a,b,result);
   sign_extend sign(comp[31],result);
 endmodule
 
-module bne(a,b,result);
+module bne_(a,b,result);
   input [31:0] a,b;
   output [31:0] result;
   wire [31:0] comp;
