@@ -7,7 +7,7 @@ module full_adder(a,b,cin,cout,sum);
 
 endmodule
 
-module ripple_carry_adder(a,b,f_cin,result);
+module adder_(a,b,f_cin,result);
     input [31:0] a, b;
     input f_cin; //0 if the op is an addition, 1 in case of substraction (2´complement)
     output[31:0] result;

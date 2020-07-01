@@ -67,7 +67,7 @@ module maindec(input   [5:0] op,
           branch, memwrite,
           memtoreg, jump, aluop} = controls;
 
-  always_comb
+  always @ (*)
     case(op)
       6'b000000: controls <= 9'b110000010; //Rtype
       6'b100011: controls <= 9'b101001000; //LW
@@ -84,7 +84,7 @@ module aludec(input  [5:0] funct,
               input  [1:0] aluop,
               output [2:0] alucontrol);
 
-  always_comb
+  always @ (*)
     case(aluop)
       2'b00: alucontrol <= 3'b010;  // add
       2'b01: alucontrol <= 3'b110;  // sub

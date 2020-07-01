@@ -17,7 +17,7 @@ module regfile(input         clk,
   // write third port on rising edge of clock
   // register 0 hardwired to 0
 
-  always_ff @(posedge clk)
+  always @(posedge clk)
     if (we3) rf[wa3] <= wd3;
 
   assign rd1 = (ra1 != 0) ? rf[ra1] : 0;
@@ -48,7 +48,7 @@ module flopr #(parameter WIDTH = 8)
                input  [WIDTH-1:0] d,
                output [WIDTH-1:0] q);
 
-  always_ff @(posedge clk, posedge reset)
+  always @(posedge clk, posedge reset)
     if (reset) q <= 0;
     else       q <= d;
 endmodule
@@ -58,7 +58,7 @@ module flopenr #(parameter WIDTH = 8)
                  input              en,
                  input  [WIDTH-1:0] d,
                  output [WIDTH-1:0] q);
-  always_ff @(posedge clk, posedge reset)
+  always @(posedge clk, posedge reset)
     if      (reset) q <= 0;
     else if (en)    q <= d;
 endmodule

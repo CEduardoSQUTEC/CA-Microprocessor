@@ -1,15 +1,13 @@
-module slt_(a,b,result);
-  input [31:0] a,b;
-  output [31:0] result;
-  wire [31:0] comp;
-  ripple_carry_adder slt(a,~b,1'b1,comp);
-  sign_extend sign(comp[31],result);
+module slt_(input [31:0] slt_a, slt_b,
+            output [31:0] result_slt);
+  wire [31:0] slt_comp;
+  adder_ slt(slt_a,~slt_b,1'b1,slt_comp);
+  msbext #(1) sign(slt_comp[31],result_slt);
 endmodule
 
-module bne_(a,b,result);
-  input [31:0] a,b;
-  output [31:0] result;
-  wire [31:0] comp;
-  adder_ sub(a,~b,1'b1,comp);
-  assign result = comp==0? 32'b0:32'b1;
+module bne_(input [31:0] bne_a, bne_b,
+            output [31:0] result_bne);
+  wire [31:0] bne_comp;
+  adder_ sub(bne_a,~bne_b,1'b1,bne_comp);
+  assign result_bne = bne_comp==0? 32'b0:32'b1;
 endmodule

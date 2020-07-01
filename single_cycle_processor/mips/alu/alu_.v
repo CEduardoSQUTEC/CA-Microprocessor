@@ -1,10 +1,10 @@
 module alu(a,b,f,y,zero);
     input [31:0] a,b;
     input [2:0] f;
-    output [31:0] y;
+    output reg [31:0] y;
     output reg zero;
     wire [31:0] result_add, result_sub, result_and, result_or, result_slt;
-    
+
     // wire[31:0] result_arithmetic_logic, result_arithmetic, result_logic, result_comparison;
 
     // Arithmetic_part Arithmetic_part_(a,b,f,result_arithmetic);
@@ -17,17 +17,19 @@ module alu(a,b,f,y,zero);
 
     adder_ add(a,b,1'b0,result_add);
     adder_ sub(a,~b,1'b1,result_sub);
-    and_ and(a,b,result_and);
-    or_ or(a,b,result_or);
+    and_ logic_and(a,b,result_and);
+    or_ logic_or(a,b,result_or);
     slt_ slt(a,b,result_slt);
 
-    case(f):
-    3'b010: y <= result_add;
-    3'b110: y <= result_sub;
-    3'b000: y <= result_and;
-    3'b001: y <= result_or;
-    3'b111: y <= result_slt;
-    3'bxxx: y <= 3'bxxx;
+    always @ (*)
+      case(f)
+        3'b010: y <= result_add;
+        3'b110: y <= result_sub;
+        3'b000: y <= result_and;
+        3'b001: y <= result_or;
+        3'b111: y <= result_slt;
+        3'bxxx: y <= 3'bxxx;
+      endcase
 
     //Flag
     always @(*) begin
