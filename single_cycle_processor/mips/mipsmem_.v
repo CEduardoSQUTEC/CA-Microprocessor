@@ -9,7 +9,7 @@ module dmem(input         clk, we,
             input  [31:0] a, wd,
             output [31:0] rd);
 
-  wire [31:0] RAM[63:0]; //This means 64 words 32-bit; not sure if syntaxis works on verilog
+  reg [31:0] RAM[63:0]; //This means 64 words 32-bit; not sure if syntaxis works on verilog
 
   assign rd = RAM[a[31:2]];
 
@@ -25,7 +25,7 @@ module imem(input  [5:0]  a,
 
   initial
     begin
-      $readmemh("memfile.dat",RAM); // initialize memory
+      $readmemh("memfile.dat","test2.asm"); // initialize memory
     end
 
   assign rd = RAM[a]; // word aligned

@@ -61,7 +61,7 @@ module maindec(input   [5:0] op,
                output        jump,
                output  [1:0] aluop);
 
-  wire [8:0] controls;
+  reg [8:0] controls;
 
   assign {regwrite, regdst, alusrc,
           branch, memwrite,
@@ -82,7 +82,7 @@ endmodule
 //CONVERT TO 6 WORD
 module aludec(input  [5:0] funct,
               input  [1:0] aluop,
-              output [2:0] alucontrol);
+              output reg [2:0] alucontrol);
 
   always @ (*)
     case(aluop)

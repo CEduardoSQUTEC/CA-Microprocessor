@@ -10,14 +10,14 @@ module regfile(input         clk,
                input  [31:0] wd3,
                output [31:0] rd1, rd2);
 
-  wire [31:0] rf;
+  reg [31:0] rf; //Changed to reg (before it was a wire)
 
   // three ported register file
   // read two ports combinationally
   // write third port on rising edge of clock
   // register 0 hardwired to 0
 
-  always @(posedge clk)
+  always @(posedge clk) // I change this
     if (we3) rf[wa3] <= wd3;
 
   assign rd1 = (ra1 != 0) ? rf[ra1] : 0;
@@ -46,21 +46,25 @@ endmodule
 module flopr #(parameter WIDTH = 8)
               (input              clk, reset,
                input  [WIDTH-1:0] d,
-               output [WIDTH-1:0] q);
+               output reg [WIDTH-1:0] q); //Changed to reg (before it was a wire)
 
-  always @(posedge clk, posedge reset)
-    if (reset) q <= 0;
-    else       q <= d;
+  always @(posedge clk, posedge reset) begin
+    if (reset)
+        q <= 0;
+    else
+        q <= d;
+  end
 endmodule
 
 module flopenr #(parameter WIDTH = 8)
                 (input              clk, reset,
                  input              en,
                  input  [WIDTH-1:0] d,
-                 output [WIDTH-1:0] q);
-  always @(posedge clk, posedge reset)
+                 output reg [WIDTH-1:0] q); //Changed to reg (before it was a wire)
+  always @(posedge clk, posedge reset) begin
     if      (reset) q <= 0;
     else if (en)    q <= d;
+  end
 endmodule
 
 module mux2 #(parameter WIDTH = 8)
