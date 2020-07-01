@@ -7,7 +7,7 @@ module testbench;
 
   // instantiate device to be tested
   top dut(clk, reset, writedata, dataadr, memwrite);
-  
+
   // initialize test
   initial
     begin
@@ -33,4 +33,9 @@ module testbench;
         end
       end
     end
+
+  initial begin
+    $dumpfile("mips.vcd");
+    $dumpvars;
+  end
 endmodule

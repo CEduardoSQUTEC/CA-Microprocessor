@@ -2,7 +2,8 @@ module slt_(input [31:0] slt_a, slt_b,
             output [31:0] result_slt);
   wire [31:0] slt_comp;
   adder_ slt(slt_a,~slt_b,1'b1,slt_comp);
-  msbext #(1) sign(slt_comp[31],result_slt);
+  assign result_slt[0] = slt_comp[31];
+  msbext #(1) ext(result[0], result_slt);
 endmodule
 
 module bne_(input [31:0] bne_a, bne_b,

@@ -1,11 +1,11 @@
 module and_(input [31:0] and_a, and_b,
             output [31:0] result_and);
-  assign result_and = and_a && and_b;
+  assign result_and = and_a & and_b;
 endmodule
 
 module or_(input [31:0] or_a, or_b,
            output [31:0] result_or);
-  assign result_or = or_a || or_b;
+  assign result_or = or_a | or_b;
 endmodule
 
 /*UNUSED

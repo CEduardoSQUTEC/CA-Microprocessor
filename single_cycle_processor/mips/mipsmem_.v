@@ -9,7 +9,7 @@ module dmem(input         clk, we,
             input  [31:0] a, wd,
             output [31:0] rd);
 
-  reg [31:0] RAM[63:0]; //This means 64 words 32-bit; not sure if syntaxis works on verilog
+  reg [63:0] RAM[17:0]; //This means 64 words 32-bit; not sure if syntaxis works on verilog
 
   assign rd = RAM[a[31:2]];
 
@@ -21,7 +21,7 @@ endmodule
 module imem(input  [5:0]  a,
             output [31:0] rd);
 
-  reg [31:0] RAM[63:0];
+  reg [63:0] RAM[17:0];
 
   initial
     begin
