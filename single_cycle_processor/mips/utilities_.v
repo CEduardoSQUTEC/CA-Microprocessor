@@ -51,8 +51,8 @@ module msbext #(parameter INITIAL = 16, parameter FINAL = 32)
                (input [INITIAL-1:0] src,
                 output [FINAL-1:0] out);
 
-  wire [FINAL-1-INITIAL:0] ext;
-  assign ext = src[INITIAL-1]? 1 : 0;
-  assign out = {ext,src};
+  wire [32:0] ext;
+  assign ext = src[INITIAL-1]? 32'hFFFFFFFF : 32'b0;
+  assign out = {ext[FINAL-1-INITIAL:0],src};
 
 endmodule
