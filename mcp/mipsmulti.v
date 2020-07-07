@@ -1,5 +1,5 @@
 //-------------------------------------------------------
-// mipsmulti.sv
+// mipsmulti.s
 // From David_Harris and Sarah_Harris book design
 // Multicycle MIPS processor
 //------------------------------------------------
@@ -58,6 +58,8 @@ module maindec(input        clk, reset,
                output       alusrca, branch, iord, memtoreg, regdst,
                output [1:0] alusrcb, pcsrc,
                output [1:0] aluop);
+
+  // This is a moore machine.
 
   parameter   FETCH   = 4'b0000; // State 0
   parameter   DECODE  = 4'b0001; // State 1
@@ -148,6 +150,24 @@ module aludec(input  [5:0] funct,
 
   // Remember that you may also reuse any code from previous labs.
 
+  // Ed comment: It's exactly the same as the single cycle?
+  // Yes it is!
+
+always@(*)
+    case(aluop)
+    2'b00:  alucontrol <= 3'b010; // add
+    2'b01:  alucontrol <= 3'b110; // sub
+    // 2'b11:  alucontrol <= 3'b001; //or (Our implementation)
+    // Maybe not this one?
+    default: case(funct)
+        6'b100000: alucontrol <= 3'b010; // add
+        6'b100010: alucontrol <= 3'b110; // sub
+        6'b100100: alucontrol <= 3'b000; // and
+        6'b100101: alucontrol <= 3'b001; // or
+        6'b101010: alucontrol <= 3'b111; // slt
+        default:   alucontrol <= 3'bxxx; // ???
+      endcase
+    endcase
 endmodule
 
 
