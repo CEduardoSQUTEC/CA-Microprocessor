@@ -49,7 +49,8 @@ module controller(input        clk, reset,
   // Add combinational logic (i.e. an assign statement)
   // to produce the PCEn signal (pcen) from the branch,
   // zero, and pcwrite signals
-
+  
+  assign pcen = (branch & zero) | pcwrite;
 endmodule
 
 module maindec(input        clk, reset,
@@ -60,7 +61,6 @@ module maindec(input        clk, reset,
                output [1:0] aluop);
 
   // This is a moore machine.
-
   parameter   FETCH   = 4'b0000; // State 0
   parameter   DECODE  = 4'b0001; // State 1
   parameter   MEMADR  = 4'b0010;	// State 2
@@ -89,10 +89,6 @@ module maindec(input        clk, reset,
     if(reset) state <= FETCH;
     else state <= nextstate;
 
-  // ADD CODE HERE
-  // Finish entering the next state logic below.  We've completed the first
-  // two states, FETCH and DECODE, for you.
-
   // next state logic
   always @ (*)
     case(state)
@@ -107,16 +103,20 @@ module maindec(input        clk, reset,
                  default: nextstate <= 4'bx; // should never happen
                endcase
  		// Add code here
-      MEMADR:
-      MEMRD:
-      MEMWB:
-      MEMWR:
-      RTYPEEX:
-      RTYPEWB:
-      BEQEX:
-      ADDIEX:
-      ADDIWB:
-      JEX:
+      MEMADR: case(op)
+                LW: nextstate <= MEMRD;
+                SW: nextstate <= MEMWR;
+                default: nextstate <= 4'bx; // should never happen
+              endcase
+      MEMRD: nextstate <= MEMWB;
+      MEMWB: nextstate <= FETCH;
+      MEMWR: nextstate <= FETCH;
+      RTYPEEX: nextstate <= RTYPEWB;
+      RTYPEWB: nextstate <= FETCH;
+      BEQEX: nextstate <= FETCH;
+      ADDIEX: nextstate <= ADDIWB;
+      ADDIWB: nextstate <= FETCH;
+      JEX: nextstate <= FETCH;
       default: nextstate <= 4'bx; // should never happen
     endcase
 
@@ -125,16 +125,20 @@ module maindec(input        clk, reset,
           alusrca, branch, iord, memtoreg, regdst,
           alusrcb, pcsrc, aluop} = controls;
 
-  // ADD CODE HERE
-  // Finish entering the output logic below.  We've entered the
-  // output logic for the first two states, S0 and S1, for you.
   always @ (*)
     case(state)
-      FETCH:   controls <= 15'h5010;
-      DECODE:  controls <= 15'h0030;
-    // your code goes here
-
-
+      FETCH:    controls <= 15'h5010;
+      DECODE:   controls <= 15'h0030;
+      MEMADR:   controls <= 15'h0420;
+      MEMRD:    controls <= 15'h0100;
+      MEMWB:    controls <= 15'h0880;
+      MEMWR:    controls <= 15'h2100;
+      RTYPEEX:  controls <= 15'h0402;
+      RTYPEWB:  controls <= 15'h0840;
+      BEQEX:    controls <= 15'h0605;
+      ADDIEX:   controls <= 15'h0420;
+      ADDIWB:   controls <= 15'h1000;
+      JEX:      controls <= 15'h4008;
       default: controls <= 15'hxxxx; // should never happen
     endcase
 endmodule
