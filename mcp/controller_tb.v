@@ -7,7 +7,14 @@ module controller_tb;
     wire [1:0] alusrcb, pcsrc;
     wire [2:0] alucontrol;
 
-    controller dut()
+    controller dut(clk, reset,
+                    op, funct,
+                    zero, pcen,
+                    memwrite, irwrite, regwrite, regwrite,
+                    alusrca, iord, memtoreg, regdst,
+                    alusrcb, pcsrc,
+                    alucontrol);
 
+    
 
 endmodule
