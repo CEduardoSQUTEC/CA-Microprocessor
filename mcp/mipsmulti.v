@@ -45,11 +45,6 @@ module controller(input        clk, reset,
              alusrcb, pcsrc, aluop);
   aludec  ad(funct, aluop, alucontrol);
 
-  // ADD CODE HERE
-  // Add combinational logic (i.e. an assign statement)
-  // to produce the PCEn signal (pcen) from the branch,
-  // zero, and pcwrite signals
-  
   assign pcen = (branch & zero) | pcwrite;
 endmodule
 
@@ -102,7 +97,6 @@ module maindec(input        clk, reset,
                  J:       nextstate <= JEX;
                  default: nextstate <= 4'bx; // should never happen
                endcase
- 		// Add code here
       MEMADR: case(op)
                 LW: nextstate <= MEMRD;
                 SW: nextstate <= MEMWR;
@@ -147,22 +141,10 @@ module aludec(input  [5:0] funct,
               input  [1:0] aluop,
               output [2:0] alucontrol);
 
-  // ADD CODE HERE
-  // Complete the design for the ALU Decoder.
-  // Your design goes here.  Remember that this is a combinational
-  // module.
-
-  // Remember that you may also reuse any code from previous labs.
-
-  // Ed comment: It's exactly the same as the single cycle?
-  // Yes it is!
-
 always@(*)
     case(aluop)
     2'b00:  alucontrol <= 3'b010; // add
     2'b01:  alucontrol <= 3'b110; // sub
-    // 2'b11:  alucontrol <= 3'b001; //or (Our implementation)
-    // Maybe not this one?
     default: case(funct)
         6'b100000: alucontrol <= 3'b010; // add
         6'b100010: alucontrol <= 3'b110; // sub

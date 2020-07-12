@@ -1,0 +1,2 @@
+// op [5:0] | funct [5:0] | zero | controllers [14:0] | alucontrol [2:0]
+xxxxxx_100000_0_
