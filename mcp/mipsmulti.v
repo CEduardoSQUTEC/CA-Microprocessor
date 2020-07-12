@@ -9,7 +9,7 @@ module mips(input         clk, reset,
             output        memwrite,
             input  [31:0] readdata);
 
-  wire        zero, pcen, irwrite, regwrite
+  wire        zero, pcen, irwrite, regwrite;
   wire        alusrca, iord, memtoreg, regdst;
   wire [1:0]  alusrcb, pcsrc;
   wire [2:0]  alucontrol;
@@ -76,8 +76,8 @@ module maindec(input        clk, reset,
   parameter   ADDI    = 6'b001000;	// Opcode for addi
   parameter   J       = 6'b000010;	// Opcode for j
 
-  wire [3:0]  state, nextstate;
-  wire [14:0] controls;
+  reg [3:0]  state, nextstate;
+  reg [14:0] controls;
 
   // state register
   always @(posedge clk or posedge reset)
@@ -139,7 +139,7 @@ endmodule
 
 module aludec(input  [5:0] funct,
               input  [1:0] aluop,
-              output [2:0] alucontrol);
+              output reg [2:0] alucontrol);
 
 always@(*)
     case(aluop)
@@ -222,7 +222,7 @@ endmodule
 module mux4 #(parameter WIDTH = 8)
              (input  [WIDTH-1:0] d0, d1, d2, d3,
               input  [1:0]       s,
-              output [WIDTH-1:0] y);
+              output reg [WIDTH-1:0] y);
 
    always @ (*)
       case(s)
