@@ -18,10 +18,12 @@ module controller_tb;
                     alusrcb, pcsrc,
                     alucontrol);
 
+    assign {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol} = result;
+
     always begin
       clk = 1; #10; clk = 0; #10;
     end
-    
+
     initial begin
       $readmemh("controller.tv", testvector);
       vectornum = 0; errors = 0;
@@ -34,5 +36,22 @@ module controller_tb;
             result_expected = testvector[vectornum][14:0];
     end
 
+    always @(negedge clk) begin
+        if (result !== result_expected) begin
+            $display("Error in vector %d", vectornum);
+            $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
+            $display(" Outputs: result = %h (%h expected)", result, result_expected);
+            errors = errors + 1;
+        end
+        vectornum = vectornum + 1;
+        if (vectornum === //Insert here the number of cases) begin // We need to check if this only execute at the of the tv.
+            $display("%d tests completed with %d erros", vectornum, errors);
+            $finish;
+        end
+    end
 
+    initial begin
+        $dumpfile("alu.vcd");
+        $dumpvars;
+    end
 endmodule
