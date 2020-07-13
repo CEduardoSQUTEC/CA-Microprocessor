@@ -18,8 +18,6 @@ module controller_tb;
                     alusrcb, pcsrc,
                     alucontrol);
 
-    assign {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol} = result;
-
     always begin
       clk = 1; #10; clk = 0; #10;
     end
@@ -38,7 +36,6 @@ module controller_tb;
 
     always @(negedge clk) begin
         if (result !== result_expected) begin
-            $display("%b",testvector[vectornum][38:0]);
             $display("Errors in vector %d", vectornum);
             $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
             $display(" Outputs: result = %h (%h expected)", result, result_expected);

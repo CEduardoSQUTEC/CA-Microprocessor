@@ -1,5 +1,5 @@
 //-------------------------------------------------------
-// mipsmulti.s
+// mipsmulti.v
 // From David_Harris and Sarah_Harris book design
 // Multicycle MIPS processor
 //------------------------------------------------
@@ -115,9 +115,7 @@ module maindec(input        clk, reset,
     endcase
 
   // output logic
-  assign {pcwrite, memwrite, irwrite, regwrite,
-          alusrca, branch, iord, memtoreg, regdst,
-          alusrcb, pcsrc, aluop} = controls;
+  assign {pcwrite, memwrite, irwrite, regwrite, alusrca, branch, iord, memtoreg, regdst, alusrcb, pcsrc, aluop} = controls;
 
   always @ (*)
     case(state)
@@ -135,6 +133,7 @@ module maindec(input        clk, reset,
       JEX:      controls <= 15'h4008;
       default: controls <= 15'hxxxx; // should never happen
     endcase
+  // assign {pcwrite, memwrite, irwrite, regwrite, alusrca, branch, iord, memtoreg, regdst, alusrcb, pcsrc, aluop} = controls;
 endmodule
 
 module aludec(input  [5:0] funct,
