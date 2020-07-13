@@ -50,10 +50,10 @@ endmodule
 
 module maindec(input        clk, reset,
                input  [5:0] op,
-               output       pcwrite, memwrite, irwrite, regwrite,
-               output       alusrca, branch, iord, memtoreg, regdst,
-               output [1:0] alusrcb, pcsrc,
-               output [1:0] aluop);
+               output reg       pcwrite, memwrite, irwrite, regwrite,
+               output reg     alusrca, branch, iord, memtoreg, regdst,
+               output reg [1:0] alusrcb, pcsrc,
+               output reg [1:0] aluop);
 
   // This is a moore machine.
   parameter   FETCH   = 4'b0000; // State 0
@@ -116,9 +116,6 @@ module maindec(input        clk, reset,
     endcase
 
   // output logic
-  assign {pcwrite, memwrite, irwrite, regwrite,
-          alusrca, branch, iord, memtoreg, regdst,
-          alusrcb, pcsrc, aluop} = controls;
 
   always @ (*) begin
     case(state)
@@ -136,7 +133,21 @@ module maindec(input        clk, reset,
       JEX:      controls <= 15'h4008;
       default: controls <= 15'hxxxx; // should never happen
     endcase
+    pcwrite <= controls[14];
+    memwrite <= controls[13];
+    irwrite <= controls[12];
+    regwrite <= controls[11];
+    alusrca <= controls[10];
+    branch <= controls[9];
+    iord <= controls[8];
+    memtoreg <= controls[7];
+    regdst <= controls[6];
+    alusrcb <= controls[5:4];
+    pcsrc <= controls[3:2];
+    aluop <= controls[1:0];
   end
+
+
 endmodule
 
 module aludec(input  [5:0] funct,

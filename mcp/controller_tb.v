@@ -8,9 +8,7 @@ module controller_tb;
     wire [2:0] alucontrol;
     reg [14:0] result, result_expected;
     reg [14:0] vectornum, errors;
-    reg [38:0] testvector[6:0];
-
-    assign {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol} = result;
+    reg [38:0] testvector[4:0];
 
     controller dut(clk, reset,
                     op, funct,
@@ -26,7 +24,8 @@ module controller_tb;
 
     initial begin
       $readmemh("controller.tv", testvector);
-      vectornum = 0; errors = 0;
+      //Vectornum is setted with -1 just to match with the correct clock cycle (after reset)
+      vectornum = -1; errors = 0;
       reset = 1;
     end
 
@@ -38,27 +37,19 @@ module controller_tb;
     end
 
     always @(negedge clk) begin
-        // $display(pcen);
-        // $display(memwrite);
-        // $display(irwrite);
-        // $display(regwrite);
-        // $display(alusrca);
-        // $display(iord);
-        // $display(memtoreg);
-        // $display(regdst);
-        // $display(alusrcb);
-        // $display(pcsrc);
-        $display(result[14:0]);
-        $display("%b, %b",op, funct);
-
-        if (result !== result_expected) begin
-            $display("Errors in vector %d", vectornum);
-            $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
-            $display(" Outputs: result = %h (%h expected)", result, result_expected);
-            errors = errors + 1;
+        result <= {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol};
+        if(vectornum) begin
+          $display("%h", result);
+          if (result !== result_expected) begin
+              $display("Errors in vector %d", vectornum);
+              $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
+              $display(" Outputs: result = %h (%h expected)", result, result_expected);
+              errors = errors + 1;
+          end
         end
         vectornum = vectornum + 1;
-        if (vectornum === 7) begin
+        $display(vectornum);
+        if (vectornum === 27) begin
             $display("%d tests completed with %d error(s)",vectornum, errors);
             $finish;
         end
