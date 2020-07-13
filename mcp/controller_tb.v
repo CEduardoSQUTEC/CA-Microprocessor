@@ -6,6 +6,9 @@ module controller_tb;
     wire       alusrca, iord, memtoreg, regdst;
     wire [1:0] alusrcb, pcsrc;
     wire [2:0] alucontrol;
+    reg [14:0] result, result_expected;
+    reg [14:0] vectornum, errors;
+    reg [38:0] testvector[6:0];
 
     reg [14:0] vectornum, errors;
     reg [30:0] testvector[11:0];
@@ -13,7 +16,7 @@ module controller_tb;
     controller dut(clk, reset,
                     op, funct,
                     zero, pcen,
-                    memwrite, irwrite, regwrite, regwrite,
+                    memwrite, irwrite, regwrite,
                     alusrca, iord, memtoreg, regdst,
                     alusrcb, pcsrc,
                     alucontrol);
@@ -30,22 +33,23 @@ module controller_tb;
     end
 
     always @(posedge clk) begin
-            op = testvector[vectornum][30:25];
-            funct = testvector[vectornum][23:18];
-            zero = testvector[vectornum][16];
+            op = testvector[vectornum][33:28];
+            funct = testvector[vectornum][25:22];
+            zero = testvector[vectornum][17];
             result_expected = testvector[vectornum][14:0];
     end
 
     always @(negedge clk) begin
         if (result !== result_expected) begin
-            $display("Error in vector %d", vectornum);
+            $display("%b",testvector[vectornum][38:0]);
+            $display("Errors in vector %d", vectornum);
             $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
             $display(" Outputs: result = %h (%h expected)", result, result_expected);
             errors = errors + 1;
         end
         vectornum = vectornum + 1;
-        if (vectornum === //Insert here the number of cases) begin // We need to check if this only execute at the of the tv.
-            $display("%d tests completed with %d erros", vectornum, errors);
+        if (vectornum === 7) begin
+            $display("%d tests completed with %d error(s)",vectornum, errors);
             $finish;
         end
     end
@@ -54,4 +58,8 @@ module controller_tb;
         $dumpfile("alu.vcd");
         $dumpvars;
     end
+<<<<<<< HEAD
 endmodule
+=======
+endmodule
+>>>>>>> ecordovaa_features

@@ -9,7 +9,7 @@ module mips(input         clk, reset,
             output        memwrite,
             input  [31:0] readdata);
 
-  wire        zero, pcen, irwrite, regwrite
+  wire        zero, pcen, irwrite, regwrite;
   wire        alusrca, iord, memtoreg, regdst;
   wire [1:0]  alusrcb, pcsrc;
   wire [2:0]  alucontrol;
@@ -45,11 +45,6 @@ module controller(input        clk, reset,
              alusrcb, pcsrc, aluop);
   aludec  ad(funct, aluop, alucontrol);
 
-  // ADD CODE HERE
-  // Add combinational logic (i.e. an assign statement)
-  // to produce the PCEn signal (pcen) from the branch,
-  // zero, and pcwrite signals
-  
   assign pcen = (branch & zero) | pcwrite;
 endmodule
 
@@ -81,8 +76,8 @@ module maindec(input        clk, reset,
   parameter   ADDI    = 6'b001000;	// Opcode for addi
   parameter   J       = 6'b000010;	// Opcode for j
 
-  wire [3:0]  state, nextstate;
-  wire [14:0] controls;
+  reg [3:0]  state, nextstate;
+  reg [14:0] controls;
 
   // state register
   always @(posedge clk or posedge reset)
@@ -102,7 +97,6 @@ module maindec(input        clk, reset,
                  J:       nextstate <= JEX;
                  default: nextstate <= 4'bx; // should never happen
                endcase
- 		// Add code here
       MEMADR: case(op)
                 LW: nextstate <= MEMRD;
                 SW: nextstate <= MEMWR;
@@ -145,24 +139,12 @@ endmodule
 
 module aludec(input  [5:0] funct,
               input  [1:0] aluop,
-              output [2:0] alucontrol);
-
-  // ADD CODE HERE
-  // Complete the design for the ALU Decoder.
-  // Your design goes here.  Remember that this is a combinational
-  // module.
-
-  // Remember that you may also reuse any code from previous labs.
-
-  // Ed comment: It's exactly the same as the single cycle?
-  // Yes it is!
+              output reg [2:0] alucontrol);
 
 always@(*)
     case(aluop)
     2'b00:  alucontrol <= 3'b010; // add
     2'b01:  alucontrol <= 3'b110; // sub
-    // 2'b11:  alucontrol <= 3'b001; //or (Our implementation)
-    // Maybe not this one?
     default: case(funct)
         6'b100000: alucontrol <= 3'b010; // add
         6'b100010: alucontrol <= 3'b110; // sub
@@ -240,7 +222,7 @@ endmodule
 module mux4 #(parameter WIDTH = 8)
              (input  [WIDTH-1:0] d0, d1, d2, d3,
               input  [1:0]       s,
-              output [WIDTH-1:0] y);
+              output reg [WIDTH-1:0] y);
 
    always @ (*)
       case(s)
