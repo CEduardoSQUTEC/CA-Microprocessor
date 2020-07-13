@@ -80,9 +80,10 @@ module maindec(input        clk, reset,
   reg [14:0] controls;
 
   // state register
-  always @(posedge clk or posedge reset)
+  always @(posedge clk or posedge reset) begin
     if(reset) state <= FETCH;
     else state <= nextstate;
+  end
 
   // next state logic
   always @ (*)
@@ -117,7 +118,7 @@ module maindec(input        clk, reset,
   // output logic
   assign {pcwrite, memwrite, irwrite, regwrite, alusrca, branch, iord, memtoreg, regdst, alusrcb, pcsrc, aluop} = controls;
 
-  always @ (*)
+  always @ (*) begin
     case(state)
       FETCH:    controls <= 15'h5010;
       DECODE:   controls <= 15'h0030;

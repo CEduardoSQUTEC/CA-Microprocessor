@@ -1,0 +1,387 @@
+$date
+	Mon Jul 13 13:17:12 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module controller_tb $end
+$var wire 3 ! alucontrol [2:0] $end
+$var wire 1 " alusrca $end
+$var wire 2 # alusrcb [1:0] $end
+$var wire 1 $ iord $end
+$var wire 1 % irwrite $end
+$var wire 1 & memtoreg $end
+$var wire 1 ' memwrite $end
+$var wire 1 ( pcen $end
+$var wire 2 ) pcsrc [1:0] $end
+$var wire 1 * regdst $end
+$var wire 1 + regwrite $end
+$var reg 1 , clk $end
+$var reg 15 - errors [14:0] $end
+$var reg 6 . funct [5:0] $end
+$var reg 6 / op [5:0] $end
+$var reg 1 0 reset $end
+$var reg 15 1 result [14:0] $end
+$var reg 15 2 result_expected [14:0] $end
+$var reg 15 3 vectornum [14:0] $end
+$var reg 1 4 zero $end
+$scope module dut $end
+$var wire 3 5 alucontrol [2:0] $end
+$var wire 2 6 aluop [1:0] $end
+$var wire 1 " alusrca $end
+$var wire 2 7 alusrcb [1:0] $end
+$var wire 1 8 branch $end
+$var wire 1 9 clk $end
+$var wire 6 : funct [5:0] $end
+$var wire 1 $ iord $end
+$var wire 1 % irwrite $end
+$var wire 1 & memtoreg $end
+$var wire 1 ' memwrite $end
+$var wire 6 ; op [5:0] $end
+$var wire 1 ( pcen $end
+$var wire 2 < pcsrc [1:0] $end
+$var wire 1 = pcwrite $end
+$var wire 1 * regdst $end
+$var wire 1 + regwrite $end
+$var wire 1 > reset $end
+$var wire 1 ? zero $end
+$scope module md $end
+$var wire 2 @ aluop [1:0] $end
+$var wire 1 " alusrca $end
+$var wire 2 A alusrcb [1:0] $end
+$var wire 1 8 branch $end
+$var wire 1 9 clk $end
+$var wire 1 $ iord $end
+$var wire 1 % irwrite $end
+$var wire 1 & memtoreg $end
+$var wire 1 ' memwrite $end
+$var wire 6 B op [5:0] $end
+$var wire 2 C pcsrc [1:0] $end
+$var wire 1 = pcwrite $end
+$var wire 1 * regdst $end
+$var wire 1 + regwrite $end
+$var wire 1 > reset $end
+$var reg 15 D controls [14:0] $end
+$var reg 4 E nextstate [3:0] $end
+$var reg 4 F state [3:0] $end
+$upscope $end
+$scope module ad $end
+$var wire 2 G aluop [1:0] $end
+$var wire 6 H funct [5:0] $end
+$var reg 3 I alucontrol [2:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module mips $end
+$var wire 32 J adr [31:0] $end
+$var wire 3 K alucontrol [2:0] $end
+$var wire 1 L alusrca $end
+$var wire 2 M alusrcb [1:0] $end
+$var wire 1 N clk $end
+$var wire 6 O funct [5:0] $end
+$var wire 1 P iord $end
+$var wire 1 Q irwrite $end
+$var wire 1 R memtoreg $end
+$var wire 1 S memwrite $end
+$var wire 6 T op [5:0] $end
+$var wire 1 U pcen $end
+$var wire 2 V pcsrc [1:0] $end
+$var wire 32 W readdata [31:0] $end
+$var wire 1 X regdst $end
+$var wire 1 Y regwrite $end
+$var wire 1 Z reset $end
+$var wire 32 [ writedata [31:0] $end
+$var wire 1 \ zero $end
+$scope module c $end
+$var wire 3 ] alucontrol [2:0] $end
+$var wire 2 ^ aluop [1:0] $end
+$var wire 1 L alusrca $end
+$var wire 2 _ alusrcb [1:0] $end
+$var wire 1 ` branch $end
+$var wire 1 N clk $end
+$var wire 6 a funct [5:0] $end
+$var wire 1 P iord $end
+$var wire 1 Q irwrite $end
+$var wire 1 R memtoreg $end
+$var wire 1 S memwrite $end
+$var wire 6 b op [5:0] $end
+$var wire 1 U pcen $end
+$var wire 2 c pcsrc [1:0] $end
+$var wire 1 d pcwrite $end
+$var wire 1 X regdst $end
+$var wire 1 Y regwrite $end
+$var wire 1 Z reset $end
+$var wire 1 \ zero $end
+$scope module md $end
+$var wire 2 e aluop [1:0] $end
+$var wire 1 L alusrca $end
+$var wire 2 f alusrcb [1:0] $end
+$var wire 1 ` branch $end
+$var wire 1 N clk $end
+$var wire 1 P iord $end
+$var wire 1 Q irwrite $end
+$var wire 1 R memtoreg $end
+$var wire 1 S memwrite $end
+$var wire 6 g op [5:0] $end
+$var wire 2 h pcsrc [1:0] $end
+$var wire 1 d pcwrite $end
+$var wire 1 X regdst $end
+$var wire 1 Y regwrite $end
+$var wire 1 Z reset $end
+$var reg 15 i controls [14:0] $end
+$var reg 4 j nextstate [3:0] $end
+$var reg 4 k state [3:0] $end
+$upscope $end
+$scope module ad $end
+$var wire 2 l aluop [1:0] $end
+$var wire 6 m funct [5:0] $end
+$var reg 3 n alucontrol [2:0] $end
+$upscope $end
+$upscope $end
+$scope module dp $end
+$var wire 32 o adr [31:0] $end
+$var wire 3 p alucontrol [2:0] $end
+$var wire 1 L alusrca $end
+$var wire 2 q alusrcb [1:0] $end
+$var wire 1 N clk $end
+$var wire 6 r funct [5:0] $end
+$var wire 32 s instr [31:0] $end
+$var wire 1 P iord $end
+$var wire 1 Q irwrite $end
+$var wire 1 R memtoreg $end
+$var wire 6 t op [5:0] $end
+$var wire 1 U pcen $end
+$var wire 2 u pcsrc [1:0] $end
+$var wire 32 v readdata [31:0] $end
+$var wire 1 X regdst $end
+$var wire 1 Y regwrite $end
+$var wire 1 Z reset $end
+$var wire 32 w writedata [31:0] $end
+$var wire 1 \ zero $end
+$upscope $end
+$upscope $end
+$scope module mux3 $end
+$var wire 8 x d0 [7:0] $end
+$var wire 8 y d1 [7:0] $end
+$var wire 8 z d2 [7:0] $end
+$var wire 2 { s [1:0] $end
+$var wire 8 | y [7:0] $end
+$upscope $end
+$scope module mux4 $end
+$var wire 8 } d0 [7:0] $end
+$var wire 8 ~ d1 [7:0] $end
+$var wire 8 !" d2 [7:0] $end
+$var wire 8 "" d3 [7:0] $end
+$var wire 2 #" s [1:0] $end
+$var reg 8 $" y [7:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx $"
+bz #"
+bz ""
+bz !"
+bz ~
+bz }
+bz |
+bz {
+bz z
+bz y
+bz x
+bz w
+bz v
+bx u
+bz t
+bz s
+bz r
+bx q
+bx p
+bz o
+bx n
+bz m
+bx l
+bx k
+bx j
+bx i
+bx h
+bz g
+bx f
+bx e
+xd
+bx c
+bz b
+bz a
+x`
+bx _
+bx ^
+bx ]
+z\
+bz [
+zZ
+xY
+xX
+bz W
+bx V
+xU
+bz T
+xS
+xR
+xQ
+xP
+bz O
+zN
+bx M
+xL
+bx K
+bz J
+b10 I
+bx H
+b0 G
+b0 F
+b1 E
+b101000000010000 D
+bx C
+bx B
+bx A
+b0 @
+x?
+1>
+1=
+bx <
+bx ;
+bx :
+19
+08
+bx 7
+b0 6
+bx 5
+x4
+b0 3
+bx 2
+bx 1
+10
+bx /
+bx .
+b0 -
+1,
+x+
+x*
+bx )
+x(
+x'
+x&
+x%
+x$
+bx #
+x"
+bx !
+$end
+#1
+bz |
+#10
+b1 3
+0,
+09
+#20
+0=
+b110000 D
+b110 E
+b1 F
+b110000 2
+04
+0?
+b100000 .
+b100000 :
+b100000 H
+b0 /
+b0 ;
+b0 B
+1,
+19
+00
+0>
+#30
+b10 3
+b1 -
+0,
+09
+#40
+b10 6
+b10 @
+b10 G
+b10000000010 D
+b111 E
+b110 F
+b10000000010 2
+1,
+19
+#50
+b11 3
+b10 -
+0,
+09
+#60
+b0 6
+b0 @
+b0 G
+b100001000000 D
+b0 E
+b111 F
+b100001000000 2
+1,
+19
+#70
+b100 3
+b11 -
+0,
+09
+#80
+1=
+b101000000010000 D
+b1 E
+b0 F
+bx 2
+x4
+x?
+bx .
+bx :
+bx H
+bx /
+bx ;
+bx B
+1,
+19
+#90
+b101 3
+0,
+09
+#100
+0=
+b110000 D
+bx E
+b1 F
+1,
+19
+#110
+b110 3
+0,
+09
+#120
+bx I
+x=
+x8
+bx 6
+bx @
+bx G
+bx D
+bx F
+1,
+19
+#130
+b111 3
+0,
+09
