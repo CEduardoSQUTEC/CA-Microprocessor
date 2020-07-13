@@ -10,6 +10,8 @@ module controller_tb;
     reg [14:0] vectornum, errors;
     reg [38:0] testvector[6:0];
 
+    assign {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol} = result;
+
     controller dut(clk, reset,
                     op, funct,
                     zero, pcen,
@@ -18,27 +20,38 @@ module controller_tb;
                     alusrcb, pcsrc,
                     alucontrol);
 
-    assign {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol} = result;
-
     always begin
-      clk = 1; #10; clk = 0; #10;
+      clk = 1; #10; clk = 0; #10; reset = 0;
     end
 
     initial begin
       $readmemh("controller.tv", testvector);
       vectornum = 0; errors = 0;
+      reset = 1;
     end
 
     always @(posedge clk) begin
             op = testvector[vectornum][33:28];
-            funct = testvector[vectornum][25:22];
-            zero = testvector[vectornum][17];
+            funct = testvector[vectornum][25:20];
+            zero = testvector[vectornum][15];
             result_expected = testvector[vectornum][14:0];
     end
 
     always @(negedge clk) begin
+        // $display(pcen);
+        // $display(memwrite);
+        // $display(irwrite);
+        // $display(regwrite);
+        // $display(alusrca);
+        // $display(iord);
+        // $display(memtoreg);
+        // $display(regdst);
+        // $display(alusrcb);
+        // $display(pcsrc);
+        $display(result[14:0]);
+        $display("%b, %b",op, funct);
+
         if (result !== result_expected) begin
-            $display("%b",testvector[vectornum][38:0]);
             $display("Errors in vector %d", vectornum);
             $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
             $display(" Outputs: result = %h (%h expected)", result, result_expected);
@@ -52,7 +65,7 @@ module controller_tb;
     end
 
     initial begin
-        $dumpfile("alu.vcd");
+        $dumpfile("mcp.vcd");
         $dumpvars;
     end
 endmodule
