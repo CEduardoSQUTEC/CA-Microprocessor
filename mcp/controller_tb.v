@@ -10,9 +10,6 @@ module controller_tb;
     reg [14:0] vectornum, errors;
     reg [38:0] testvector[6:0];
 
-    reg [14:0] vectornum, errors;
-    reg [30:0] testvector[11:0];
-
     controller dut(clk, reset,
                     op, funct,
                     zero, pcen,
@@ -58,8 +55,4 @@ module controller_tb;
         $dumpfile("alu.vcd");
         $dumpvars;
     end
-<<<<<<< HEAD
 endmodule
-=======
-endmodule
->>>>>>> ecordovaa_features
