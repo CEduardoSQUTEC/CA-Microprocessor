@@ -56,8 +56,8 @@ module maindec(input        clk, reset,
                output reg [1:0] aluop);
 
   // This is a moore machine.
-  parameter   FETCH   = 4'b0000; // State 0
-  parameter   DECODE  = 4'b0001; // State 1
+  parameter   FETCH   = 4'b0000;  // State 0
+  parameter   DECODE  = 4'b0001;  // State 1
   parameter   MEMADR  = 4'b0010;	// State 2
   parameter   MEMRD   = 4'b0011;	// State 3
   parameter   MEMWB   = 4'b0100;	// State 4

@@ -8,7 +8,7 @@ module controller_tb;
     wire [2:0] alucontrol;
     reg [14:0] result, result_expected;
     reg [14:0] vectornum, errors;
-    reg [38:0] testvector[4:0];
+    reg [38:0] testvector[26:0];
 
     controller dut(clk, reset,
                     op, funct,
@@ -32,25 +32,23 @@ module controller_tb;
     always @(posedge clk) begin
             op = testvector[vectornum][33:28];
             funct = testvector[vectornum][25:20];
-            zero = testvector[vectornum][15];
+            zero = testvector[vectornum][16];
             result_expected = testvector[vectornum][14:0];
     end
 
     always @(negedge clk) begin
         result <= {pcen, memwrite, irwrite, regwrite, alusrca, iord, memtoreg, regdst, alusrcb, pcsrc, alucontrol};
         if(vectornum) begin
-          $display("%h", result);
           if (result !== result_expected) begin
-              $display("Errors in vector %d", vectornum);
+              $display("\nErrors in vector %d", vectornum);
               $display(" Inputs: op = %b, funct = %b, zero = %b", op, funct, zero);
               $display(" Outputs: result = %h (%h expected)", result, result_expected);
               errors = errors + 1;
           end
         end
         vectornum = vectornum + 1;
-        $display(vectornum);
         if (vectornum === 27) begin
-            $display("%d tests completed with %d error(s)",vectornum, errors);
+            $display("%d tests (7 instructions) completed with %d error(s)",vectornum, errors);
             $finish;
         end
     end
