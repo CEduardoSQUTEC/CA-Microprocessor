@@ -1,9 +1,3 @@
-//-------------------------------------------------------
-// mipsmulti.s
-// From David_Harris and Sarah_Harris book design
-// Multicycle MIPS processor
-//------------------------------------------------
-
 module mips(input         clk, reset,
             output [31:0] adr, writedata,
             output        memwrite,
@@ -19,12 +13,16 @@ module mips(input         clk, reset,
                pcen, memwrite, irwrite, regwrite,
                alusrca, iord, memtoreg, regdst,
                alusrcb, pcsrc, alucontrol);
+
+
   datapath dp(clk, reset,
               pcen, irwrite, regwrite,
               alusrca, iord, memtoreg, regdst,
               alusrcb, pcsrc, alucontrol,
               op, funct, zero,
               adr, writedata, readdata);
+
+
 endmodule
 
 module controller(input        clk, reset,
@@ -170,78 +168,142 @@ always@(*)
 endmodule
 
 
+module datapath(input          clk, reset,
+                input          pcen, irwrite, regwrite,
+                input          alusrca, iord, memtoreg, regdst,
+                input   [1:0]  alusrcb, pcsrc,
+                input   [2:0]  alucontrol,
+                output  [5:0]  op, funct,
+                output         zero,
+                output  [31:0] adr,
+                output  reg [31:0]writedata,
+                input   [31:0] readdata);
 
+//----------------  Wire-Reg box -----------------------
+                wire [4:0]  writereg;
+                wire [31:0] pcnext;
+                reg  [31:0]  pc;
+                reg  [31:0] instr, data;
+                wire [31:0] srca, srcb;
+                reg  [31:0] a;
+                wire [31:0] aluresult;
+                reg  [31:0] aluout;
+                wire [31:0] signimm;
+                wire [31:0] signimmsh;
+                wire [31:0] wd3, rd1, rd2;
+//---------------------------------------------------
 
-// Complete the datapath module below for Lab 11.
-// You do not need to complete this module for Lab 10
-
-// The datapath unit is a structural verilog module.  That is,
-// it is composed of instances of its sub-modules.  For example,
-// the instruction register is instantiated as a 32-bit flopenr.
-// The other submodules are likewise instantiated.
-
-module datapath(input         clk, reset,
-                input         pcen, irwrite, regwrite,
-                input         alusrca, iord, memtoreg, regdst,
-                input  [1:0]  alusrcb, pcsrc,
-                input  [2:0]  alucontrol,
-                output [5:0]  op, funct,
-                output        zero,
-                output [31:0] adr, writedata,
-                input  [31:0] readdata);
-
-  // Below are the internal signals of the datapath module.
-
-  wire [4:0]  writereg;
-  wire [31:0] pcnext, pc;
-  wire [31:0] instr, data, srca, srcb;
-  wire [31:0] a;
-  wire [31:0] aluresult, aluout;
-  wire [31:0] signimm;   // the sign-extended immediate
-  wire [31:0] signimmsh;	// the sign-extended immediate shifted left by 2
-  wire [31:0] wd3, rd1, rd2;
-
-  // op and funct fields to controller
+  // Setting codes for control unit
   assign op = instr[31:26];
   assign funct = instr[5:0];
 
-  // Your datapath hardware goes below.  Instantiate each of the submodules
-  // that you need.  Remember that alu's, mux's and various other
-  // versions of parameterizable modules are available in mipsparts.sv
-  // from Lab 9. You'll likely want to include this verilog file in your
-  // simulation.
+  //"Activate" program when reset is asserted
+  always @ (*) begin
+   if (reset) pc <= 0;
+  end
 
-  // We've included parameterizable 3:1 and 4:1 muxes below for your use.
+ //Regfile logic
+  regfile    regf(clk, regwrite, instr[25:21], instr[20:16], writereg, wd3, rd1, rd2);
 
-  // Remember to give your instantiated modules applicable names
-  // such as pcreg (PC register), wdmux (Write Data Mux), etc.
-  // so it's easier to understand.
+  mux2 #(5)  RegDstMux(instr[20:16], instr[15:11], regdst, writereg);
 
-  // ADD CODE HERE
+  mux2 #(32) WD3Mux(aluout, data, memtoreg, wd3);
 
-  // datapath
+  //Adjusting some wires
+  signext    se(instr[15:0], signimm);
+
+  sl2        inmsl2(signimm, signimmsh);
+
+
+  //ALU Logic
+  mux2 #(32) SrcAmux(pc,a,alusrca,srca);
+
+  mux4 #(32) SrcBmux(writedata, 32'b100, signimm, signimmsh, alusrcb, srcb);
+
+  alu        alu(srca,srcb,alucontrol,aluresult,zero);
+
+  //Saving ALU output
+  always @ (posedge clk) begin
+    aluout <= aluresult;
+  end
+
+  //Saving operands from register
+  always @ (posedge clk) begin
+    a <= rd1;
+    writedata <= rd2;
+  end
+
+  //Setting Instr and Data. Always on posedge
+  always @ (posedge clk) begin
+   if(irwrite)  instr <=  readdata;
+   data <= readdata;
+  end
+
+  //NextPC Logic
+  mux3 #(32) Nextmux(aluresult, aluout, { pc[31:28], {instr[25:0], 2'b00} }, pcsrc, pcnext);
+
+  mux2 #(32) PCadrMux(pc,aluout,iord,adr);
+
+  //Going to next instruction
+   always @ (posedge clk)begin
+     if(pcen) pc <= pcnext;
+   end
 
 endmodule
 
+//-------------------------Inner modules---------------------------------
+              module mux3 #(parameter WIDTH = 8)
+                           (input  [WIDTH-1:0] d0, d1, d2,
+                            input  [1:0]       s,
+                            output [WIDTH-1:0] y);
 
-module mux3 #(parameter WIDTH = 8)
-             (input  [WIDTH-1:0] d0, d1, d2,
-              input  [1:0]       s,
-              output [WIDTH-1:0] y);
+                assign #1 y = s[1] ? d2 : (s[0] ? d1 : d0);
+              endmodule
 
-  assign #1 y = s[1] ? d2 : (s[0] ? d1 : d0);
-endmodule
+              module mux4 #(parameter WIDTH = 8)
+                           (input  [WIDTH-1:0] d0, d1, d2, d3,
+                            input  [1:0]       s,
+                            output reg [WIDTH-1:0] y);
 
-module mux4 #(parameter WIDTH = 8)
-             (input  [WIDTH-1:0] d0, d1, d2, d3,
-              input  [1:0]       s,
-              output reg [WIDTH-1:0] y);
+                 always @ (*)
+                    case(s)
+                       2'b00: y <= d0;
+                       2'b01: y <= d1;
+                       2'b10: y <= d2;
+                       2'b11: y <= d3;
+                    endcase
+              endmodule
 
-   always @ (*)
-      case(s)
-         2'b00: y <= d0;
-         2'b01: y <= d1;
-         2'b10: y <= d2;
-         2'b11: y <= d3;
-      endcase
-endmodule
+              module mux2 # (parameter WIDTH = 8)
+                            (input [WIDTH-1:0] d0, d1,
+                            input s,
+                            output [WIDTH-1:0] y);
+                assign y = s? d1 : d0;
+              endmodule
+
+              module signext (input [15:0] a,
+                              output [31:0] y);
+              assign y = {{16{a[15]}}, a};
+              endmodule
+
+              module regfile(input          clk,
+                             input          we3,
+                             input   [4:0]  ra1, ra2, wa3,
+                             input   [31:0] wd3,
+                             output  [31:0] rd1, rd2);
+
+                reg [31:0] rf[31:0];
+
+                always @(posedge clk)
+                  if (we3) rf[wa3] <= wd3;
+                      assign rd1 = (ra1 != 0) ? rf[ra1] : 0;
+                      assign rd2 = (ra2 != 0) ? rf[ra2] : 0;
+              endmodule
+
+              module sl2(input    [31:0]  a,
+                          output  [31:0]  y);
+                  // shift left by 2
+                  assign y = {a[25:0], 2'b00};
+              endmodule
+
+//---------------------------------------------------------------------

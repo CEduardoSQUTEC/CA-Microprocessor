@@ -1,0 +1,1 @@
+iverilog.exe -o a.out mipsmem.v mipsmulti.v mipsmulti_tb.v topmulti.v alu/alu_.v alu/comparison_part_/comparison_components_v. alu/logic_part_/logic_components_.v alu/utilities_.v
