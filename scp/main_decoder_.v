@@ -1,7 +1,7 @@
 module maindec(input [5:0] op,
               output memtoreg, memwrite,
               output [1:0] branch,
-              output [1:0] alusrc, 
+              output [1:0] alusrc,
               output regdst, regwrite,
               output jump,
               output [1:0] aluop);
@@ -11,6 +11,7 @@ module maindec(input [5:0] op,
           branch, memwrite,
           memtoreg, jump, aluop} = controls;
 
+  //Maindec signals
   always @ (*)
     case(op)
     6'b000000: controls <= 11'b11000000010; //Rtyp

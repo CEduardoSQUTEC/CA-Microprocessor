@@ -15,4 +15,5 @@ module controller (input [5:0] op, funct,
   aludec ad (funct, aluop, alucontrol);
 
   assign pcsrc = branch[0]? (branch[1] & ~zero) : (branch[1] & zero);
+
 endmodule

@@ -1,0 +1,819 @@
+$date
+	Sun Jul 19 22:31:07 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module controller_tb $end
+$var wire 3 ! alucontrol [2:0] $end
+$var wire 1 " alusrca $end
+$var wire 2 # alusrcb [1:0] $end
+$var wire 1 $ iord $end
+$var wire 1 % irwrite $end
+$var wire 1 & memtoreg $end
+$var wire 1 ' memwrite $end
+$var wire 1 ( pcen $end
+$var wire 2 ) pcsrc [1:0] $end
+$var wire 1 * regdst $end
+$var wire 1 + regwrite $end
+$var reg 1 , clk $end
+$var reg 15 - errors [14:0] $end
+$var reg 6 . funct [5:0] $end
+$var reg 6 / op [5:0] $end
+$var reg 1 0 reset $end
+$var reg 15 1 result [14:0] $end
+$var reg 15 2 result_expected [14:0] $end
+$var reg 15 3 vectornum [14:0] $end
+$var reg 1 4 zero $end
+$scope module dut $end
+$var wire 3 5 alucontrol [2:0] $end
+$var wire 2 6 aluop [1:0] $end
+$var wire 1 " alusrca $end
+$var wire 2 7 alusrcb [1:0] $end
+$var wire 1 8 branch $end
+$var wire 1 9 clk $end
+$var wire 6 : funct [5:0] $end
+$var wire 1 $ iord $end
+$var wire 1 % irwrite $end
+$var wire 1 & memtoreg $end
+$var wire 1 ' memwrite $end
+$var wire 6 ; op [5:0] $end
+$var wire 1 ( pcen $end
+$var wire 2 < pcsrc [1:0] $end
+$var wire 1 = pcwrite $end
+$var wire 1 * regdst $end
+$var wire 1 + regwrite $end
+$var wire 1 > reset $end
+$var wire 1 ? zero $end
+$scope module md $end
+$var wire 1 9 clk $end
+$var wire 6 @ op [5:0] $end
+$var wire 1 > reset $end
+$var reg 2 A aluop [1:0] $end
+$var reg 1 B alusrca $end
+$var reg 2 C alusrcb [1:0] $end
+$var reg 1 D branch $end
+$var reg 15 E controls [14:0] $end
+$var reg 1 F iord $end
+$var reg 1 G irwrite $end
+$var reg 1 H memtoreg $end
+$var reg 1 I memwrite $end
+$var reg 4 J nextstate [3:0] $end
+$var reg 2 K pcsrc [1:0] $end
+$var reg 1 L pcwrite $end
+$var reg 1 M regdst $end
+$var reg 1 N regwrite $end
+$var reg 4 O state [3:0] $end
+$upscope $end
+$scope module ad $end
+$var wire 2 P aluop [1:0] $end
+$var wire 6 Q funct [5:0] $end
+$var reg 3 R alucontrol [2:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module mips $end
+$var wire 32 S adr [31:0] $end
+$var wire 3 T alucontrol [2:0] $end
+$var wire 1 U alusrca $end
+$var wire 2 V alusrcb [1:0] $end
+$var wire 1 W clk $end
+$var wire 6 X funct [5:0] $end
+$var wire 1 Y iord $end
+$var wire 1 Z irwrite $end
+$var wire 1 [ memtoreg $end
+$var wire 1 \ memwrite $end
+$var wire 6 ] op [5:0] $end
+$var wire 1 ^ pcen $end
+$var wire 2 _ pcsrc [1:0] $end
+$var wire 32 ` readdata [31:0] $end
+$var wire 1 a regdst $end
+$var wire 1 b regwrite $end
+$var wire 1 c reset $end
+$var wire 32 d writedata [31:0] $end
+$var wire 1 e zero $end
+$scope module c $end
+$var wire 3 f alucontrol [2:0] $end
+$var wire 2 g aluop [1:0] $end
+$var wire 1 U alusrca $end
+$var wire 2 h alusrcb [1:0] $end
+$var wire 1 i branch $end
+$var wire 1 W clk $end
+$var wire 6 j funct [5:0] $end
+$var wire 1 Y iord $end
+$var wire 1 Z irwrite $end
+$var wire 1 [ memtoreg $end
+$var wire 1 \ memwrite $end
+$var wire 6 k op [5:0] $end
+$var wire 1 ^ pcen $end
+$var wire 2 l pcsrc [1:0] $end
+$var wire 1 m pcwrite $end
+$var wire 1 a regdst $end
+$var wire 1 b regwrite $end
+$var wire 1 c reset $end
+$var wire 1 e zero $end
+$scope module md $end
+$var wire 1 W clk $end
+$var wire 6 n op [5:0] $end
+$var wire 1 c reset $end
+$var reg 2 o aluop [1:0] $end
+$var reg 1 p alusrca $end
+$var reg 2 q alusrcb [1:0] $end
+$var reg 1 r branch $end
+$var reg 15 s controls [14:0] $end
+$var reg 1 t iord $end
+$var reg 1 u irwrite $end
+$var reg 1 v memtoreg $end
+$var reg 1 w memwrite $end
+$var reg 4 x nextstate [3:0] $end
+$var reg 2 y pcsrc [1:0] $end
+$var reg 1 z pcwrite $end
+$var reg 1 { regdst $end
+$var reg 1 | regwrite $end
+$var reg 4 } state [3:0] $end
+$upscope $end
+$scope module ad $end
+$var wire 2 ~ aluop [1:0] $end
+$var wire 6 !" funct [5:0] $end
+$var reg 3 "" alucontrol [2:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx ""
+bz !"
+bx ~
+bx }
+x|
+x{
+xz
+bx y
+bx x
+xw
+xv
+xu
+xt
+bx s
+xr
+bx q
+xp
+bx o
+bz n
+xm
+bx l
+bz k
+bz j
+xi
+bx h
+bx g
+bx f
+ze
+bz d
+zc
+xb
+xa
+bz `
+bx _
+x^
+bz ]
+x\
+x[
+xZ
+xY
+bz X
+zW
+bx V
+xU
+bx T
+bz S
+b10 R
+bx Q
+b0 P
+b0 O
+0N
+0M
+1L
+b0 K
+b1 J
+0I
+0H
+1G
+0F
+b101000000010000 E
+0D
+b1 C
+0B
+b0 A
+bx @
+x?
+1>
+1=
+b0 <
+bx ;
+bx :
+19
+08
+b1 7
+b0 6
+b10 5
+x4
+b111111111111111 3
+bx 2
+bx 1
+10
+bx /
+bx .
+b0 -
+1,
+0+
+0*
+b0 )
+1(
+0'
+0&
+1%
+0$
+b1 #
+0"
+b10 !
+$end
+#10
+b101000000100010 1
+b0 3
+0,
+09
+#20
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b110 J
+b1 O
+b0 2
+04
+0?
+b0 .
+b0 :
+b0 Q
+b0 /
+b0 ;
+b0 @
+1,
+19
+00
+0>
+#30
+b1100010 1
+b1 3
+0,
+09
+#40
+b10 A
+b10 6
+b10 P
+b0 C
+b0 #
+b0 7
+1B
+1"
+b10000000010 E
+b111 J
+b110 O
+b1100010 2
+b100000 .
+b100000 :
+b100000 Q
+b100 /
+b100 ;
+b100 @
+1,
+19
+#50
+b10000000010 1
+b10 3
+0,
+09
+#60
+b0 A
+b0 6
+b0 P
+1M
+1*
+0B
+0"
+1N
+1+
+b100001000000 E
+b0 J
+b111 O
+b10000000010 2
+1,
+19
+#70
+b100010000010 1
+b11 3
+0,
+09
+#80
+1(
+b1 C
+b1 #
+b1 7
+0M
+0*
+0N
+0+
+1G
+1%
+1L
+1=
+b101000000010000 E
+b1 J
+b0 O
+b100010000010 2
+1,
+19
+#90
+b101000000100010 1
+b100 3
+0,
+09
+#100
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b1000 J
+b1 O
+b101000000100010 2
+1,
+19
+#110
+b1100010 1
+b101 3
+0,
+09
+#120
+b110 R
+b110 !
+b110 5
+b1 A
+b1 6
+b1 P
+b1 K
+b1 )
+b1 <
+b0 C
+b0 #
+b0 7
+1D
+18
+1B
+1"
+b11000000101 E
+b0 J
+b1000 O
+b1100010 2
+1,
+19
+#130
+b10000001110 1
+b110 3
+0,
+09
+#140
+b10 R
+b10 !
+b10 5
+1(
+b0 A
+b0 6
+b0 P
+b0 K
+b0 )
+b0 <
+b1 C
+b1 #
+b1 7
+0D
+08
+0B
+0"
+1G
+1%
+1L
+1=
+b101000000010000 E
+b1 J
+b0 O
+b10000001110 2
+1,
+19
+#150
+b101000000100010 1
+b111 3
+0,
+09
+#160
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b1000 J
+b1 O
+b101000000100010 2
+14
+1?
+1,
+19
+#170
+b1100010 1
+b1000 3
+0,
+09
+#180
+b110 R
+b110 !
+b110 5
+1(
+b1 A
+b1 6
+b1 P
+b1 K
+b1 )
+b1 <
+b0 C
+b0 #
+b0 7
+1D
+18
+1B
+1"
+b11000000101 E
+b0 J
+b1000 O
+b1100010 2
+1,
+19
+#190
+b100010000001110 1
+b1001 3
+0,
+09
+#200
+b10 R
+b10 !
+b10 5
+b0 A
+b0 6
+b0 P
+b0 K
+b0 )
+b0 <
+b1 C
+b1 #
+b1 7
+0D
+08
+0B
+0"
+1G
+1%
+1L
+1=
+b101000000010000 E
+b1 J
+b0 O
+b100010000001110 2
+1,
+19
+#210
+b101000000100010 1
+b1010 3
+0,
+09
+#220
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b1001 J
+b1 O
+b101000000100010 2
+04
+0?
+b1000 /
+b1000 ;
+b1000 @
+1,
+19
+#230
+b1100010 1
+b1011 3
+0,
+09
+#240
+b10 C
+b10 #
+b10 7
+1B
+1"
+b10000100000 E
+b1010 J
+b1001 O
+b1100010 2
+1,
+19
+#250
+b10001000010 1
+b1100 3
+0,
+09
+#260
+b0 C
+b0 #
+b0 7
+0B
+0"
+1G
+1%
+b1000000000000 E
+b0 J
+b1010 O
+b10001000010 2
+1,
+19
+#270
+b1000000000010 1
+b1101 3
+0,
+09
+#280
+1(
+b1 C
+b1 #
+b1 7
+1L
+1=
+b101000000010000 E
+b1 J
+b0 O
+b1000000000010 2
+1,
+19
+#290
+b101000000100010 1
+b1110 3
+0,
+09
+#300
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b1011 J
+b1 O
+b101000000100010 2
+b10 /
+b10 ;
+b10 @
+1,
+19
+#310
+b1100010 1
+b1111 3
+0,
+09
+#320
+1(
+b10 K
+b10 )
+b10 <
+b0 C
+b0 #
+b0 7
+1L
+1=
+b100000000001000 E
+b0 J
+b1011 O
+b1100010 2
+1,
+19
+#330
+b100000000010010 1
+b10000 3
+0,
+09
+#340
+b0 K
+b0 )
+b0 <
+b1 C
+b1 #
+b1 7
+1G
+1%
+b101000000010000 E
+b1 J
+b0 O
+b100000000010010 2
+1,
+19
+#350
+b101000000100010 1
+b10001 3
+0,
+09
+#360
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b10 J
+b1 O
+b101000000100010 2
+b101011 /
+b101011 ;
+b101011 @
+1,
+19
+#370
+b1100010 1
+b10010 3
+0,
+09
+#380
+b10 C
+b10 #
+b10 7
+1B
+1"
+b10000100000 E
+b101 J
+b10 O
+b1100010 2
+1,
+19
+#390
+b10001000010 1
+b10011 3
+0,
+09
+#400
+b0 C
+b0 #
+b0 7
+1F
+1$
+0B
+0"
+1I
+1'
+b10000100000000 E
+b0 J
+b101 O
+b10001000010 2
+1,
+19
+#410
+b10001000000010 1
+b10100 3
+0,
+09
+#420
+1(
+b1 C
+b1 #
+b1 7
+0F
+0$
+1G
+1%
+0I
+0'
+1L
+1=
+b101000000010000 E
+b1 J
+b0 O
+b10001000000010 2
+1,
+19
+#430
+b101000000100010 1
+b10101 3
+0,
+09
+#440
+0(
+b11 C
+b11 #
+b11 7
+0G
+0%
+0L
+0=
+b110000 E
+b10 J
+b1 O
+b101000000100010 2
+b100011 /
+b100011 ;
+b100011 @
+1,
+19
+#450
+b1100010 1
+b10110 3
+0,
+09
+#460
+b10 C
+b10 #
+b10 7
+1B
+1"
+b10000100000 E
+b11 J
+b10 O
+b1100010 2
+1,
+19
+#470
+b10001000010 1
+b10111 3
+0,
+09
+#480
+b0 C
+b0 #
+b0 7
+1F
+1$
+0B
+0"
+b100000000 E
+b100 J
+b11 O
+b10001000010 2
+1,
+19
+#490
+b1000000010 1
+b11000 3
+0,
+09
+#500
+1H
+1&
+0F
+0$
+1N
+1+
+b100010000000 E
+b0 J
+b100 O
+b1000000010 2
+1,
+19
+#510
+b100100000010 1
+b11001 3
+0,
+09
