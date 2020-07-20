@@ -1,4 +1,5 @@
-module testbench();
+`timescale 1ns/1ns
+module testbench;
     reg clk;
     reg reset;
 
@@ -9,24 +10,19 @@ module testbench();
 
     initial
         begin
-            reset <= 1; #10; reset <= 0;
+            reset <= 1; #1; reset <= 0;
         end
 
     always
         begin
-            clk <= 1; #5; clk <= 0; #5;
+            clk <= 1; #2; clk <= 0; #5;
         end
 
     always @ (negedge clk)
     begin
-        if (dataadr === 92) begin
-            if (dataadr === 92 & writedata === 5) begin
-                $display("Simulation succeeded");
-                $stop;
-            end else if (dataadr !== 92) begin
-                $display("Simulation failed");
-                $stop;
-            end
+        if (dataadr === 32'h4C) begin
+            $display("Simulation finished");
+            $stop;
         end
     end
 
