@@ -9,7 +9,7 @@ module testbench();
 
     initial
         begin
-            reset <= 1; #22; reset <= 0;
+            reset <= 1; #10; reset <= 0;
         end
 
     always
