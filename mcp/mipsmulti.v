@@ -202,12 +202,13 @@ module datapath(input              clk, reset,
    if (reset) pc <= 0;
   end
 
-  mux2 #(5)  RegDstMux(instr[20:16], instr[15:11], regdst, writereg);
-
-  mux2 #(32) WD3Mux(aluout, data, memtoreg, wd3);
-
   //Regfile logic
    regfile    regf(clk, regwrite, instr[25:21], instr[20:16], writereg, wd3, rd1, rd2);
+
+
+   mux2 #(5)  RegDstMux(instr[20:16], instr[15:11], regdst, writereg);
+
+   mux2 #(32) WD3Mux(aluout, data, memtoreg, wd3);
 
 
   //Adjusting some wires
@@ -240,17 +241,16 @@ module datapath(input              clk, reset,
    data <= readdata;
   end
 
+  //Going to next instruction
+   always @ (posedge clk)begin
+     if(pcen) pc <= pcnext;
+   end
+
   //NextPC Logic
   mux3 #(32) Nextmux(aluresult, aluout, {pc[31:28], {instr[25:0], 2'b00} }, pcsrc, pcnext);
 
 
   mux2 #(32) PCadrMux(pc,aluout,iord,adr);
-
-
-  //Going to next instruction
-   always @ (posedge clk)begin
-     if(pcen) pc <= pcnext;
-   end
 
 endmodule
 

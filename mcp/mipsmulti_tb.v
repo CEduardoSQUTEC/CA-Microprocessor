@@ -20,8 +20,8 @@ module testbench;
 
     always @ (negedge clk)
     begin
-        if (dataadr === 32'h4C) begin
-            $display("Simulation finished");
+        if (dataadr === 32'h4C & writedata===5) begin
+            $display("Simulation suceeded");
             $stop;
         end
     end

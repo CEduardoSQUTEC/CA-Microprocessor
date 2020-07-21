@@ -1,3 +1,0 @@
-do:
-	iverilog.exe -o a.out mipsmulti.v controllertest_xx.v
-	vvp a.out
